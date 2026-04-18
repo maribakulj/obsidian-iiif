@@ -1,0 +1,25 @@
+{
+  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@id": "https://example.org/iiif/collection/beatus",
+  "@type": "sc:Collection",
+  "label": "Beatus de Liébana — corpus numérique",
+  "description": "Corpus des manuscrits connus du Commentaire sur l'Apocalypse.",
+  "attribution": "Compilation par Example Research Group",
+  "manifests": [
+    {
+      "@id": "https://example.org/iiif/beatus-silos/manifest",
+      "@type": "sc:Manifest",
+      "label": "Beatus de Silos"
+    },
+    {
+      "@id": "https://example.org/iiif/beatus-saint-sever/manifest",
+      "@type": "sc:Manifest",
+      "label": "Beatus de Saint-Sever"
+    },
+    {
+      "@id": "https://example.org/iiif/beatus-gerona/manifest",
+      "@type": "sc:Manifest",
+      "label": "Beatus de Gérone"
+    }
+  ]
+}

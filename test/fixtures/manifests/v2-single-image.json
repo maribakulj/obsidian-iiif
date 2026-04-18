@@ -1,0 +1,58 @@
+{
+  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@id": "https://example.org/iiif/book1/manifest",
+  "@type": "sc:Manifest",
+  "label": "Book 1",
+  "metadata": [
+    { "label": "Author", "value": "Anne Author" },
+    { "label": "Published", "value": "Paris, circa 1400" }
+  ],
+  "description": "A single-page example manifest.",
+  "attribution": "Provided by Example Institution",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "thumbnail": {
+    "@id": "https://example.org/iiif/book1/canvas/p1/full/80,/0/default.jpg",
+    "service": {
+      "@context": "http://iiif.io/api/image/2/context.json",
+      "@id": "https://example.org/iiif/book1/canvas/p1",
+      "profile": "http://iiif.io/api/image/2/level1.json"
+    }
+  },
+  "sequences": [
+    {
+      "@id": "https://example.org/iiif/book1/sequence/normal",
+      "@type": "sc:Sequence",
+      "label": "Current Page Order",
+      "viewingDirection": "left-to-right",
+      "canvases": [
+        {
+          "@id": "https://example.org/iiif/book1/canvas/p1",
+          "@type": "sc:Canvas",
+          "label": "p. 1",
+          "height": 1800,
+          "width": 1200,
+          "images": [
+            {
+              "@id": "https://example.org/iiif/book1/imageanno/p1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://example.org/iiif/book1/res/page1.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "height": 1800,
+                "width": 1200,
+                "service": {
+                  "@context": "http://iiif.io/api/image/2/context.json",
+                  "@id": "https://example.org/iiif/book1/canvas/p1",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+              },
+              "on": "https://example.org/iiif/book1/canvas/p1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
