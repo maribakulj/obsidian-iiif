@@ -3,7 +3,8 @@
 Import IIIF manifests, clip image regions, and weave patrimonial digital objects
 into your notes.
 
-> **Status** — Sprint 0 / bootstrap. Not yet usable.
+> **Status** — v0.1 (Sprint 2). Manifest import works end-to-end.
+> Region picker (Sprint 3) is the next milestone.
 
 ## Concept
 
@@ -24,9 +25,9 @@ Think *Zotero for patrimonial visual objects*, not *Mirador in Obsidian*.
 
 | Sprint | Focus | Release |
 | --- | --- | --- |
-| 0 | Bootstrap, CI, fixture corpus | — |
-| 1 | IIIF v2/v3 parser, Image API builder | — |
-| 2 | Manifest import command | v0.1 |
+| 0 | Bootstrap, CI, fixture corpus | ✅ |
+| 1 | IIIF v2/v3 parser, Image API builder | ✅ |
+| 2 | Manifest import command | ✅ v0.1 |
 | 3 | Region picker (drag-rectangle) | v0.2 |
 | 4 | Canvas browser | — |
 | 5 | Transcripts & metadata enrichment | v0.3 |
@@ -69,6 +70,18 @@ npm run build       # type-check + production build
 npm run typecheck   # tsc --noEmit
 npm test            # run test suite against fixture manifests
 ```
+
+## Using the plugin (v0.1)
+
+1. Open the command palette and run **IIIF: Import IIIF manifest from URL**.
+2. Paste the URL of a IIIF Presentation API v2 or v3 manifest.
+3. Click **Fetch & preview** to validate and see a summary.
+4. Click **Import** — a new note is created in your configured folder
+   (default: `IIIF/`) with frontmatter, embedded thumbnail, metadata
+   table, and a canvas listing.
+
+Frontmatter is Dataview-friendly: query your imported manifests by
+`iiif_version`, `provider`, `canvas_count`, `date`, `cote`, etc.
 
 ### Fixture corpus
 
