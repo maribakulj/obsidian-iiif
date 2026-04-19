@@ -132,6 +132,37 @@ export class IIIFSettingsTab extends PluginSettingTab {
           }),
       );
 
+    containerEl.createEl("h3", { text: "External viewer" });
+
+    new Setting(containerEl)
+      .setName("Viewer used by 'Open in viewer' commands")
+      .addDropdown((d) =>
+        d
+          .addOptions({
+            mirador: "Mirador",
+            universal: "Universal Viewer",
+            custom: "Custom URL template",
+          })
+          .setValue(this.plugin.settings.externalViewer)
+          .onChange(async (v) => {
+            this.plugin.settings.externalViewer = v as typeof this.plugin.settings.externalViewer;
+            await this.plugin.saveSettings();
+          }),
+      );
+
+    new Setting(containerEl)
+      .setName("Custom viewer URL template")
+      .setDesc("Used only when the Custom option is selected. Must contain a `{url}` placeholder for the manifest URL.")
+      .addText((t) =>
+        t
+          .setPlaceholder("https://my-viewer.example.org/?manifest={url}")
+          .setValue(this.plugin.settings.customViewerUrlTemplate)
+          .onChange(async (v) => {
+            this.plugin.settings.customViewerUrlTemplate = v.trim();
+            await this.plugin.saveSettings();
+          }),
+      );
+
     containerEl.createEl("h3", { text: "Snapshots" });
 
     new Setting(containerEl)

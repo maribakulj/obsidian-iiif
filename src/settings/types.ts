@@ -29,6 +29,10 @@ export interface IIIFSettings {
   snapshotThumbnails: boolean;
   /** Folder (relative to vault root) where snapshots are written. */
   snapshotAttachmentFolder: string;
+  /** External viewer used by the "Open in viewer" commands. */
+  externalViewer: "mirador" | "universal" | "custom";
+  /** URL template used when `externalViewer === 'custom'`. */
+  customViewerUrlTemplate: string;
 }
 
 export const DEFAULT_SETTINGS: IIIFSettings = {
@@ -44,6 +48,8 @@ export const DEFAULT_SETTINGS: IIIFSettings = {
   transcriptMaxChars: 20000,
   snapshotThumbnails: false,
   snapshotAttachmentFolder: "IIIF/_attachments",
+  externalViewer: "mirador",
+  customViewerUrlTemplate: "",
 };
 
 export function toLangOpts(s: IIIFSettings): LanguagePickOptions {

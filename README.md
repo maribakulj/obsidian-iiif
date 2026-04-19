@@ -34,7 +34,7 @@ Think *Zotero for patrimonial visual objects*, not *Mirador in Obsidian*.
 | 5 | Transcripts & metadata enrichment | ✅ v0.3 |
 | 6 | Cache & resilience | ✅ v0.3.1 |
 | 7 | Collections support | ✅ v0.4 |
-| 8 | External viewer handoff (Mirador/UV) | — |
+| 8 | External viewer handoff (Mirador/UV) | ✅ v0.4.1 |
 | 9 | W3C Web Annotation export | v0.5 |
 | 10 | Polish & community submission | v1.0 |
 
@@ -141,6 +141,20 @@ in frontmatter for future refreshes.
 
 Sub-collections are listed in the index as external links. Re-run
 the command on each to expand them.
+
+### Hand off to Mirador or Universal Viewer
+
+When you need the full viewer experience (zoom, pan, multi-viewport,
+side-by-side), open the active note's manifest in an external viewer:
+
+- **IIIF: Open manifest in external viewer** — launches the URL in
+  your default browser.
+- **IIIF: Copy external viewer link** — same URL to the clipboard.
+
+The viewer (Mirador, Universal Viewer, or a custom URL template) is
+configured in the plugin settings. Self-hosted Mirador/UV instances
+work too — pick "Custom URL template" and provide a template with a
+`{url}` placeholder.
 
 ### Refresh a manifest
 

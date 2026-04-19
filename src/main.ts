@@ -4,6 +4,7 @@ import { ImportCollectionModal } from "./ui/import-collection-modal/ImportCollec
 import { runInsertCanvas } from "./commands/insertCanvas.ts";
 import { runInsertRegion } from "./commands/insertRegion.ts";
 import { runInsertTranscript } from "./commands/insertTranscript.ts";
+import { runCopyViewerLink, runOpenInViewer } from "./commands/openInViewer.ts";
 import { runRefreshManifest } from "./commands/refreshManifest.ts";
 import { DEFAULT_SETTINGS, type IIIFSettings } from "./settings/types.ts";
 import { IIIFSettingsTab } from "./settings/SettingsTab.ts";
@@ -65,6 +66,22 @@ export default class IIIFPlugin extends Plugin {
       name: "Refresh manifest from frontmatter",
       callback: () => {
         void runRefreshManifest({ app: this.app, settings: this.settings });
+      },
+    });
+
+    this.addCommand({
+      id: "open-in-viewer",
+      name: "Open manifest in external viewer",
+      callback: () => {
+        runOpenInViewer({ app: this.app, settings: this.settings });
+      },
+    });
+
+    this.addCommand({
+      id: "copy-viewer-link",
+      name: "Copy external viewer link",
+      callback: () => {
+        void runCopyViewerLink({ app: this.app, settings: this.settings });
       },
     });
 
