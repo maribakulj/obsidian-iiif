@@ -101,5 +101,35 @@ export class IIIFSettingsTab extends PluginSettingTab {
             await this.plugin.saveSettings();
           }),
       );
+
+    containerEl.createEl("h3", { text: "Region picker" });
+
+    new Setting(containerEl)
+      .setName("Picker display width")
+      .setDesc("Pixel width requested when rendering a canvas for region selection. Larger = finer precision, slower to load.")
+      .addText((t) =>
+        t
+          .setPlaceholder(String(DEFAULT_SETTINGS.regionPickerDisplayWidth))
+          .setValue(String(this.plugin.settings.regionPickerDisplayWidth))
+          .onChange(async (v) => {
+            const n = parseInt(v, 10);
+            this.plugin.settings.regionPickerDisplayWidth = Number.isFinite(n) && n > 0 ? n : DEFAULT_SETTINGS.regionPickerDisplayWidth;
+            await this.plugin.saveSettings();
+          }),
+      );
+
+    new Setting(containerEl)
+      .setName("Inserted region width")
+      .setDesc("Pixel width baked into the Image API URL when a region is inserted into a note.")
+      .addText((t) =>
+        t
+          .setPlaceholder(String(DEFAULT_SETTINGS.regionInsertWidth))
+          .setValue(String(this.plugin.settings.regionInsertWidth))
+          .onChange(async (v) => {
+            const n = parseInt(v, 10);
+            this.plugin.settings.regionInsertWidth = Number.isFinite(n) && n > 0 ? n : DEFAULT_SETTINGS.regionInsertWidth;
+            await this.plugin.saveSettings();
+          }),
+      );
   }
 }

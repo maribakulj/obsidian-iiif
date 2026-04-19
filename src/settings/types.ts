@@ -15,6 +15,10 @@ export interface IIIFSettings {
   insertCanvasTable: boolean;
   /** Cap on rows in the canvas table to keep notes readable. */
   maxCanvasesInTable: number;
+  /** Width (px) the region picker requests when rendering a canvas. */
+  regionPickerDisplayWidth: number;
+  /** Width (px) baked into the inserted Image API URL for a region. */
+  regionInsertWidth: number;
 }
 
 export const DEFAULT_SETTINGS: IIIFSettings = {
@@ -25,6 +29,8 @@ export const DEFAULT_SETTINGS: IIIFSettings = {
   thumbnailWidth: 400,
   insertCanvasTable: true,
   maxCanvasesInTable: 50,
+  regionPickerDisplayWidth: 1024,
+  regionInsertWidth: 800,
 };
 
 export function toLangOpts(s: IIIFSettings): LanguagePickOptions {

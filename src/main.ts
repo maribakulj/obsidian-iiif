@@ -1,5 +1,6 @@
 import { Plugin } from "obsidian";
 import { handleImport } from "./commands/importManifest.ts";
+import { runInsertRegion } from "./commands/insertRegion.ts";
 import { DEFAULT_SETTINGS, type IIIFSettings } from "./settings/types.ts";
 import { IIIFSettingsTab } from "./settings/SettingsTab.ts";
 import { ImportManifestModal } from "./ui/import-modal/ImportManifestModal.ts";
@@ -17,6 +18,14 @@ export default class IIIFPlugin extends Plugin {
         new ImportManifestModal(this.app, this.settings, async (manifest, url) => {
           await handleImport({ app: this.app, settings: this.settings }, manifest, url);
         }).open();
+      },
+    });
+
+    this.addCommand({
+      id: "insert-region",
+      name: "Insert IIIF region",
+      editorCallback: (editor) => {
+        void runInsertRegion({ app: this.app, settings: this.settings }, editor);
       },
     });
 
