@@ -256,6 +256,20 @@
   margin-top: 1em;
 }
 
+/* ---------- Annotation import modal ---------- */
+
+.iiif-annotation-modal .iiif-am-hint {
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+
+.iiif-annotation-modal .iiif-am-actions {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+
 /* ---------- Collection import modal ---------- */
 
 .iiif-collection-modal .iiif-col-body {

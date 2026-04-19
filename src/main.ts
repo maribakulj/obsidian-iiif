@@ -5,7 +5,10 @@ import { runInsertCanvas } from "./commands/insertCanvas.ts";
 import { runInsertRegion } from "./commands/insertRegion.ts";
 import { runInsertTranscript } from "./commands/insertTranscript.ts";
 import { runCopyViewerLink, runOpenInViewer } from "./commands/openInViewer.ts";
+import { runExportAnnotations } from "./commands/exportAnnotations.ts";
+import { runImportAnnotations } from "./commands/importAnnotations.ts";
 import { runRefreshManifest } from "./commands/refreshManifest.ts";
+import { ImportAnnotationsModal } from "./ui/annotation-modal/ImportAnnotationsModal.ts";
 import { DEFAULT_SETTINGS, type IIIFSettings } from "./settings/types.ts";
 import { IIIFSettingsTab } from "./settings/SettingsTab.ts";
 import { ImportManifestModal } from "./ui/import-modal/ImportManifestModal.ts";
@@ -82,6 +85,28 @@ export default class IIIFPlugin extends Plugin {
       name: "Copy external viewer link",
       callback: () => {
         void runCopyViewerLink({ app: this.app, settings: this.settings });
+      },
+    });
+
+    this.addCommand({
+      id: "export-annotations",
+      name: "Export note's IIIF embeds as Web Annotations",
+      callback: () => {
+        void runExportAnnotations({ app: this.app, settings: this.settings });
+      },
+    });
+
+    this.addCommand({
+      id: "import-annotations",
+      name: "Import Web Annotations into note",
+      editorCallback: (editor) => {
+        new ImportAnnotationsModal(this.app, async (source) => {
+          await runImportAnnotations(
+            { app: this.app, settings: this.settings },
+            editor,
+            source,
+          );
+        }).open();
       },
     });
 

@@ -3,9 +3,9 @@
 Import IIIF manifests, clip image regions, and weave patrimonial digital objects
 into your notes.
 
-> **Status** — v0.4 (Sprint 7). Import, region picker, canvas browser,
-> transcript ingestion (ALTO / hOCR / plain text), snapshot + refresh,
-> and bulk collection import are all live.
+> **Status** — v0.5 (Sprint 9). Import, region picker, canvas browser,
+> transcript ingestion, snapshot + refresh, bulk collection import,
+> external viewer handoff, and round-trip W3C Web Annotations.
 
 ## Concept
 
@@ -35,7 +35,7 @@ Think *Zotero for patrimonial visual objects*, not *Mirador in Obsidian*.
 | 6 | Cache & resilience | ✅ v0.3.1 |
 | 7 | Collections support | ✅ v0.4 |
 | 8 | External viewer handoff (Mirador/UV) | ✅ v0.4.1 |
-| 9 | W3C Web Annotation export | v0.5 |
+| 9 | W3C Web Annotation round-trip | ✅ v0.5 |
 | 10 | Polish & community submission | v1.0 |
 
 ## Development
@@ -141,6 +141,27 @@ in frontmatter for future refreshes.
 
 Sub-collections are listed in the index as external links. Re-run
 the command on each to expand them.
+
+### Round-trip Web Annotations
+
+Your notes can be exported as a W3C Web Annotation document (the
+standard format used by Mirador, the Web Annotation Working Group,
+and most institutional annotation servers):
+
+- **IIIF: Export note's IIIF embeds as Web Annotations** — walks the
+  active note for IIIF region/canvas embeds, fetches the manifest
+  from frontmatter, builds an `AnnotationPage` (each annotation
+  pointing at its canvas with an `xywh=` Media Fragments selector
+  when the embed crops a region), and writes it to
+  `<note>.annotations.json` next to the note.
+
+- **IIIF: Import Web Annotations into note** — paste a vault path
+  or URL pointing at any Web Annotation JSON-LD document and each
+  annotation becomes a Markdown image embed at the cursor, pointing
+  at the right cropped region of the right canvas.
+
+This makes your Obsidian notes interoperable with the broader IIIF
+ecosystem in both directions.
 
 ### Hand off to Mirador or Universal Viewer
 
