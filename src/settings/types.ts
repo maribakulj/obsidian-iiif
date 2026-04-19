@@ -21,6 +21,14 @@ export interface IIIFSettings {
   regionInsertWidth: number;
   /** Truncate inserted transcripts beyond this many characters. 0 = unlimited. */
   transcriptMaxChars: number;
+  /**
+   * When enabled, the manifest importer downloads the header thumbnail
+   * and stores it as a vault attachment so the note keeps a visual
+   * identity even if the remote host later changes its URL layout.
+   */
+  snapshotThumbnails: boolean;
+  /** Folder (relative to vault root) where snapshots are written. */
+  snapshotAttachmentFolder: string;
 }
 
 export const DEFAULT_SETTINGS: IIIFSettings = {
@@ -34,6 +42,8 @@ export const DEFAULT_SETTINGS: IIIFSettings = {
   regionPickerDisplayWidth: 1024,
   regionInsertWidth: 800,
   transcriptMaxChars: 20000,
+  snapshotThumbnails: false,
+  snapshotAttachmentFolder: "IIIF/_attachments",
 };
 
 export function toLangOpts(s: IIIFSettings): LanguagePickOptions {

@@ -31,7 +31,7 @@ Think *Zotero for patrimonial visual objects*, not *Mirador in Obsidian*.
 | 3 | Region picker (drag-rectangle) | ✅ v0.2 |
 | 4 | Canvas browser | ✅ |
 | 5 | Transcripts & metadata enrichment | ✅ v0.3 |
-| 6 | Cache & resilience | — |
+| 6 | Cache & resilience | ✅ v0.3.1 |
 | 7 | Collections support | v0.4 |
 | 8 | External viewer handoff (Mirador/UV) | — |
 | 9 | W3C Web Annotation export | v0.5 |
@@ -115,6 +115,25 @@ Frontmatter is Dataview-friendly. Imported notes expose canonicalized
 keys (`date`, `place`, `shelfmark`, `creator`, `period`, `material`,
 `repository`, etc.) so you can query across manifests regardless of
 whether a library used French, English, or Latin metadata labels.
+
+### Keep notes visually intact over time
+
+Enable **Snapshot header thumbnail to vault** in settings. At import
+time, the plugin downloads the manifest's header thumbnail and saves
+it as a vault attachment. The note embeds that local copy instead of
+the remote URL, so your notes keep their visual identity even if the
+institution reorganizes its URLs later. The remote URL is preserved
+in frontmatter for future refreshes.
+
+### Refresh a manifest
+
+Over time, institutions update metadata, add canvases, or fix labels.
+Open an imported note and run **IIIF: Refresh manifest from frontmatter**.
+The plugin re-fetches the manifest, shows you a diff (changed fields,
+added / removed / relabeled canvases, canonical metadata deltas), and
+on confirmation updates the frontmatter in place. The note body is
+**never** mutated — you decide what to do about structural changes,
+keeping your annotations safe.
 
 ### Fixture corpus
 

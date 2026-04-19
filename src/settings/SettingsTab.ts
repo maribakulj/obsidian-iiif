@@ -132,6 +132,33 @@ export class IIIFSettingsTab extends PluginSettingTab {
           }),
       );
 
+    containerEl.createEl("h3", { text: "Snapshots" });
+
+    new Setting(containerEl)
+      .setName("Snapshot header thumbnail to vault")
+      .setDesc(
+        "At import time, download the manifest's header thumbnail and save it as a vault attachment. The note embeds the local copy instead of the remote URL, so notes keep their visual identity even if the institution reorganizes its URLs.",
+      )
+      .addToggle((t) =>
+        t.setValue(this.plugin.settings.snapshotThumbnails).onChange(async (v) => {
+          this.plugin.settings.snapshotThumbnails = v;
+          await this.plugin.saveSettings();
+        }),
+      );
+
+    new Setting(containerEl)
+      .setName("Snapshot attachment folder")
+      .setDesc("Folder (relative to vault root) where snapshot thumbnails are written.")
+      .addText((t) =>
+        t
+          .setPlaceholder(DEFAULT_SETTINGS.snapshotAttachmentFolder)
+          .setValue(this.plugin.settings.snapshotAttachmentFolder)
+          .onChange(async (v) => {
+            this.plugin.settings.snapshotAttachmentFolder = v.trim() || DEFAULT_SETTINGS.snapshotAttachmentFolder;
+            await this.plugin.saveSettings();
+          }),
+      );
+
     containerEl.createEl("h3", { text: "Transcripts" });
 
     new Setting(containerEl)

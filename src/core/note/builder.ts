@@ -2,6 +2,7 @@ import { buildThumbnailUrl } from "../iiif/image-api.ts";
 import type { IIIFManifest } from "../iiif/types.ts";
 import { serializeFrontmatter, type Frontmatter } from "./frontmatter.ts";
 import { enrichFrontmatter } from "./metadata-enrichment.ts";
+import { pickHeaderThumbnailUrl } from "./thumbnail-selector.ts";
 
 export interface NoteBuilderOptions {
   /** Original manifest URL — preserved in frontmatter for re-fetch. */
@@ -14,6 +15,12 @@ export interface NoteBuilderOptions {
   insertCanvasTable: boolean;
   /** Cap the number of rows in the canvas table. */
   maxCanvasesInTable: number;
+  /**
+   * When set, the note embeds this URL/path instead of the derived
+   * remote thumbnail — used by the snapshot feature so a local
+   * attachment becomes the canonical thumbnail for the note body.
+   */
+  headerThumbnailOverride?: string;
 }
 
 export interface BuiltNote {
@@ -43,6 +50,9 @@ function buildFrontmatter(manifest: IIIFManifest, opts: NoteBuilderOptions): Fro
     imported: opts.importedAt.toISOString().slice(0, 10),
     tags: ["iiif"],
   };
+  const remoteThumbnail = pickHeaderThumbnailUrl(manifest, opts.thumbnailWidth);
+  if (remoteThumbnail) fm.iiif_thumbnail = remoteThumbnail;
+  if (opts.headerThumbnailOverride) fm.iiif_thumbnail_local = opts.headerThumbnailOverride;
   if (manifest.provider) fm.provider = manifest.provider;
   if (manifest.rights) fm.rights = manifest.rights;
   for (const [key, value] of Object.entries(enrichFrontmatter(manifest.metadata))) {
@@ -60,7 +70,7 @@ function buildBody(manifest: IIIFManifest, opts: NoteBuilderOptions): string {
     sections.push(`> ${subtitleBits.join(" · ")}`);
   }
 
-  const headerThumb = pickHeaderThumbnail(manifest, opts.thumbnailWidth);
+  const headerThumb = opts.headerThumbnailOverride ?? pickHeaderThumbnailUrl(manifest, opts.thumbnailWidth);
   if (headerThumb) {
     sections.push(`![](${headerThumb})`);
   }
@@ -91,19 +101,6 @@ function buildBody(manifest: IIIFManifest, opts: NoteBuilderOptions): string {
   if (resources) sections.push("## Ressources", resources);
 
   return sections.join("\n\n") + "\n";
-}
-
-function pickHeaderThumbnail(manifest: IIIFManifest, width: number): string | undefined {
-  if (manifest.thumbnail) return manifest.thumbnail;
-  const firstCanvasService = manifest.canvases[0]?.imageService?.id;
-  if (firstCanvasService) {
-    return buildThumbnailUrl(
-      firstCanvasService,
-      width,
-      manifest.version === "2" ? "2" : "3",
-    );
-  }
-  return undefined;
 }
 
 function renderMetadataTable(metadata: { label: string; value: string }[]): string {

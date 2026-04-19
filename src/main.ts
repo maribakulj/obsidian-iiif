@@ -3,6 +3,7 @@ import { handleImport } from "./commands/importManifest.ts";
 import { runInsertCanvas } from "./commands/insertCanvas.ts";
 import { runInsertRegion } from "./commands/insertRegion.ts";
 import { runInsertTranscript } from "./commands/insertTranscript.ts";
+import { runRefreshManifest } from "./commands/refreshManifest.ts";
 import { DEFAULT_SETTINGS, type IIIFSettings } from "./settings/types.ts";
 import { IIIFSettingsTab } from "./settings/SettingsTab.ts";
 import { ImportManifestModal } from "./ui/import-modal/ImportManifestModal.ts";
@@ -44,6 +45,14 @@ export default class IIIFPlugin extends Plugin {
       name: "Insert IIIF transcript (ALTO / hOCR / plain text)",
       editorCallback: (editor) => {
         void runInsertTranscript({ app: this.app, settings: this.settings }, editor);
+      },
+    });
+
+    this.addCommand({
+      id: "refresh-manifest",
+      name: "Refresh manifest from frontmatter",
+      callback: () => {
+        void runRefreshManifest({ app: this.app, settings: this.settings });
       },
     });
 

@@ -1,6 +1,8 @@
 import { App, normalizePath, Notice, TFile, TFolder, Vault, Workspace } from "obsidian";
 import { buildManifestNote } from "../core/note/builder.ts";
 import { buildFilename, sanitize, uniquify } from "../core/note/filename.ts";
+import { pickHeaderThumbnailUrl } from "../core/note/thumbnail-selector.ts";
+import { snapshotThumbnailToVault, SnapshotError } from "../core/snapshot/thumbnail.ts";
 import type { IIIFManifest } from "../core/iiif/types.ts";
 import type { IIIFSettings } from "../settings/types.ts";
 
@@ -24,12 +26,33 @@ export async function importManifestToVault(
   const initial = `${folder ? folder + "/" : ""}${stem}.md`;
   const targetPath = uniquify(initial, (p) => app.vault.getAbstractFileByPath(p) != null);
 
+  let headerThumbnailOverride: string | undefined;
+  if (settings.snapshotThumbnails) {
+    const remote = pickHeaderThumbnailUrl(manifest, settings.thumbnailWidth);
+    if (remote) {
+      try {
+        const snap = await snapshotThumbnailToVault({
+          vault: app.vault,
+          remoteUrl: remote,
+          attachmentFolder: settings.snapshotAttachmentFolder,
+          noteStem: stem,
+          noteFolder: folder,
+        });
+        headerThumbnailOverride = snap.embedPath;
+      } catch (e) {
+        const msg = e instanceof SnapshotError ? e.message : (e as Error).message;
+        new Notice(`Thumbnail snapshot failed, keeping remote URL: ${msg}`);
+      }
+    }
+  }
+
   const content = buildManifestNote(manifest, {
     manifestUrl: sourceUrl,
     importedAt: new Date(),
     thumbnailWidth: settings.thumbnailWidth,
     insertCanvasTable: settings.insertCanvasTable,
     maxCanvasesInTable: settings.maxCanvasesInTable,
+    headerThumbnailOverride,
   });
 
   const file = await app.vault.create(targetPath, content);

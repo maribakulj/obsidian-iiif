@@ -256,6 +256,43 @@
   margin-top: 1em;
 }
 
+/* ---------- Refresh summary modal ---------- */
+
+.iiif-refresh-modal .iiif-rm-subtitle {
+  margin: 0 0 0.75em;
+  font-size: 0.9em;
+  opacity: 0.85;
+}
+
+.iiif-refresh-modal .iiif-rm-unchanged {
+  padding: 0.75em;
+  border: 1px dashed var(--background-modifier-border);
+  border-radius: 4px;
+  font-style: italic;
+}
+
+.iiif-refresh-modal .iiif-rm-body h3 {
+  font-size: 0.95em;
+  margin: 1em 0 0.3em;
+}
+
+.iiif-refresh-modal .iiif-rm-warn {
+  color: var(--text-error);
+}
+
+.iiif-refresh-modal .iiif-rm-warn-text {
+  color: var(--text-error);
+  font-size: 0.85em;
+  margin: 0.2em 0 0.4em;
+}
+
+.iiif-refresh-modal .iiif-rm-actions {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+
 /* ---------- Transcript modal ---------- */
 
 .iiif-transcript-modal .iiif-tm-body {
