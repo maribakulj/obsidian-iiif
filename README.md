@@ -3,8 +3,8 @@
 Import IIIF manifests, clip image regions, and weave patrimonial digital objects
 into your notes.
 
-> **Status** — v0.2 (Sprint 3). Manifest import + drag-rectangle
-> region picker are both working end-to-end.
+> **Status** — v0.3 (Sprint 5). Import, region picker, canvas browser,
+> and transcript ingestion (ALTO / hOCR / plain text) are all live.
 
 ## Concept
 
@@ -30,7 +30,7 @@ Think *Zotero for patrimonial visual objects*, not *Mirador in Obsidian*.
 | 2 | Manifest import command | ✅ v0.1 |
 | 3 | Region picker (drag-rectangle) | ✅ v0.2 |
 | 4 | Canvas browser | ✅ |
-| 5 | Transcripts & metadata enrichment | v0.3 |
+| 5 | Transcripts & metadata enrichment | ✅ v0.3 |
 | 6 | Cache & resilience | — |
 | 7 | Collections support | v0.4 |
 | 8 | External viewer handoff (Mirador/UV) | — |
@@ -101,8 +101,20 @@ npm test            # run test suite against fixture manifests
 4. Click **Insert** to drop all picked canvases into the note at once,
    in manifest order, as separate Markdown image embeds.
 
-Frontmatter is Dataview-friendly: query your imported manifests by
-`iiif_version`, `provider`, `canvas_count`, `date`, `cote`, etc.
+### Insert a transcript (ALTO / hOCR / plain text)
+
+1. Run **IIIF: Insert IIIF transcript** from the command palette.
+2. The modal lists every transcript declared in the manifest's
+   `seeAlso` (manifest-level and per-canvas) with its format and
+   scope.
+3. Click **Insert** on the one you want — the transcript is downloaded,
+   converted to plain text, and inserted as a Markdown section at your
+   cursor. Long transcripts are truncated per settings.
+
+Frontmatter is Dataview-friendly. Imported notes expose canonicalized
+keys (`date`, `place`, `shelfmark`, `creator`, `period`, `material`,
+`repository`, etc.) so you can query across manifests regardless of
+whether a library used French, English, or Latin metadata labels.
 
 ### Fixture corpus
 

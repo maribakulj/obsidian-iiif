@@ -46,10 +46,11 @@ describe("buildManifestNote — v3 book", () => {
     assert.match(note, /tags:\n  - iiif/);
   });
 
-  it("frontmatter surfaces well-known metadata as Dataview-friendly keys", () => {
+  it("frontmatter surfaces well-known metadata as Dataview-friendly keys (canonicalized)", () => {
+    // `Date` -> date, `Lieu` -> place, `Cote` -> shelfmark (see enrichment aliases)
     assert.match(note, /date: /);
-    assert.match(note, /lieu: Paris/);
-    assert.match(note, /cote: /);
+    assert.match(note, /place: Paris/);
+    assert.match(note, /shelfmark: /);
   });
 
   it("body has H1 with French label", () => {

@@ -256,6 +256,68 @@
   margin-top: 1em;
 }
 
+/* ---------- Transcript modal ---------- */
+
+.iiif-transcript-modal .iiif-tm-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.iiif-transcript-modal .iiif-tm-subtitle {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+
+.iiif-transcript-modal .iiif-tm-empty {
+  text-align: center;
+  padding: 1.5em;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.iiif-transcript-modal .iiif-tm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.iiif-transcript-modal .iiif-tm-row {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 0.6em 0.8em;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 5px;
+  background: var(--background-secondary);
+}
+
+.iiif-transcript-modal .iiif-tm-row-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.iiif-transcript-modal .iiif-tm-row-title {
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.iiif-transcript-modal .iiif-tm-row-meta {
+  font-size: 0.8em;
+  opacity: 0.75;
+  margin-top: 0.2em;
+}
+
+.iiif-transcript-modal .iiif-tm-actions {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+
 /* ---------- Import modal ---------- */
 
 .iiif-import-preview .iiif-hint {

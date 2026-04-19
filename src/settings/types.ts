@@ -19,6 +19,8 @@ export interface IIIFSettings {
   regionPickerDisplayWidth: number;
   /** Width (px) baked into the inserted Image API URL for a region. */
   regionInsertWidth: number;
+  /** Truncate inserted transcripts beyond this many characters. 0 = unlimited. */
+  transcriptMaxChars: number;
 }
 
 export const DEFAULT_SETTINGS: IIIFSettings = {
@@ -31,6 +33,7 @@ export const DEFAULT_SETTINGS: IIIFSettings = {
   maxCanvasesInTable: 50,
   regionPickerDisplayWidth: 1024,
   regionInsertWidth: 800,
+  transcriptMaxChars: 20000,
 };
 
 export function toLangOpts(s: IIIFSettings): LanguagePickOptions {

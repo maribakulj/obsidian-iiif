@@ -131,5 +131,21 @@ export class IIIFSettingsTab extends PluginSettingTab {
             await this.plugin.saveSettings();
           }),
       );
+
+    containerEl.createEl("h3", { text: "Transcripts" });
+
+    new Setting(containerEl)
+      .setName("Transcript truncation (chars)")
+      .setDesc("Transcripts larger than this many characters are truncated when inserted. Set to 0 for no limit.")
+      .addText((t) =>
+        t
+          .setPlaceholder(String(DEFAULT_SETTINGS.transcriptMaxChars))
+          .setValue(String(this.plugin.settings.transcriptMaxChars))
+          .onChange(async (v) => {
+            const n = parseInt(v, 10);
+            this.plugin.settings.transcriptMaxChars = Number.isFinite(n) && n >= 0 ? n : DEFAULT_SETTINGS.transcriptMaxChars;
+            await this.plugin.saveSettings();
+          }),
+      );
   }
 }

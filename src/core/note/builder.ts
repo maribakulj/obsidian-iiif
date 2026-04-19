@@ -1,6 +1,7 @@
 import { buildThumbnailUrl } from "../iiif/image-api.ts";
 import type { IIIFManifest } from "../iiif/types.ts";
 import { serializeFrontmatter, type Frontmatter } from "./frontmatter.ts";
+import { enrichFrontmatter } from "./metadata-enrichment.ts";
 
 export interface NoteBuilderOptions {
   /** Original manifest URL — preserved in frontmatter for re-fetch. */
@@ -44,12 +45,8 @@ function buildFrontmatter(manifest: IIIFManifest, opts: NoteBuilderOptions): Fro
   };
   if (manifest.provider) fm.provider = manifest.provider;
   if (manifest.rights) fm.rights = manifest.rights;
-  // Surface a couple of common metadata fields for Dataview if present.
-  for (const key of ["Date", "Lieu", "Place", "Cote", "Shelfmark", "Author", "Creator"]) {
-    const found = manifest.metadata.find(
-      (p) => p.label.toLowerCase() === key.toLowerCase(),
-    );
-    if (found) fm[snakeKey(found.label)] = found.value;
+  for (const [key, value] of Object.entries(enrichFrontmatter(manifest.metadata))) {
+    if (!(key in fm)) fm[key] = value;
   }
   return fm;
 }
@@ -151,13 +148,4 @@ function renderResources(manifest: IIIFManifest): string | undefined {
 
 function escapeTableCell(s: string): string {
   return s.replace(/\|/g, "\\|").replace(/\n/g, " ");
-}
-
-function snakeKey(label: string): string {
-  return label
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "_")
-    .replace(/^_|_$/g, "");
 }
