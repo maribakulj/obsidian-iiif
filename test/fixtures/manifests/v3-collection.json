@@ -1,0 +1,40 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://example.org/iiif/3/collection/beatus",
+  "type": "Collection",
+  "label": {
+    "fr": ["Beatus de Liébana — corpus numérique"],
+    "en": ["Beatus of Liébana — digital corpus"]
+  },
+  "summary": {
+    "fr": ["Corpus des manuscrits connus du Commentaire sur l'Apocalypse."]
+  },
+  "requiredStatement": {
+    "label": { "en": ["Attribution"] },
+    "value": { "en": ["Compiled by Example Research Group"] }
+  },
+  "items": [
+    {
+      "id": "https://example.org/iiif/3/beatus-silos/manifest.json",
+      "type": "Manifest",
+      "label": { "fr": ["Beatus de Silos"] },
+      "thumbnail": [
+        {
+          "id": "https://example.org/iiif/3/beatus-silos/thumb.jpg",
+          "type": "Image",
+          "format": "image/jpeg"
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/iiif/3/beatus-saint-sever/manifest.json",
+      "type": "Manifest",
+      "label": { "fr": ["Beatus de Saint-Sever"] }
+    },
+    {
+      "id": "https://example.org/iiif/3/beatus-gerona/manifest.json",
+      "type": "Manifest",
+      "label": { "fr": ["Beatus de Gérone"] }
+    }
+  ]
+}

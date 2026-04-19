@@ -1,0 +1,65 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://example.org/iiif/3/edge/mixed-lang/manifest.json",
+  "type": "Manifest",
+  "label": {
+    "fr": ["Sacramentaire de Gellone"],
+    "en": ["Sacramentary of Gellone"],
+    "la": ["Sacramentarium Gellonense"],
+    "none": ["BnF lat. 12048"]
+  },
+  "summary": {
+    "la": ["Liber sacramentorum, saec. VIII exeunte."],
+    "fr": ["Sacramentaire, fin du VIIIe siècle."]
+  },
+  "metadata": [
+    {
+      "label": { "none": ["Shelfmark"] },
+      "value": { "none": ["BnF, MS lat. 12048"] }
+    },
+    {
+      "label": { "fr": ["Langue"], "en": ["Language"] },
+      "value": { "la": ["Latin"] }
+    }
+  ],
+  "items": [
+    {
+      "id": "https://example.org/iiif/3/edge/mixed-lang/canvas/f001",
+      "type": "Canvas",
+      "label": {
+        "fr": ["f. 1r"],
+        "en": ["fol. 1 recto"]
+      },
+      "height": 3800,
+      "width": 2600,
+      "items": [
+        {
+          "id": "https://example.org/iiif/3/edge/mixed-lang/page/f001/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/iiif/3/edge/mixed-lang/anno/f001",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://example.org/iiif/3/edge/mixed-lang/f001/full/max/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 3800,
+                "width": 2600,
+                "service": [
+                  {
+                    "id": "https://example.org/iiif/3/edge/mixed-lang/f001",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ]
+              },
+              "target": "https://example.org/iiif/3/edge/mixed-lang/canvas/f001"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

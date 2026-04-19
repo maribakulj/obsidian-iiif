@@ -1,0 +1,445 @@
+/*
+ * Styles for obsidian-iiif. Prefixed with `iiif-` to avoid collisions
+ * with vault themes and other plugins.
+ */
+
+/* ---------- Region picker modal ---------- */
+
+.iiif-region-picker .iiif-rp-header {
+  margin-bottom: 0.5em;
+}
+
+.iiif-region-picker .iiif-rp-breadcrumb {
+  font-size: 0.85em;
+  opacity: 0.7;
+}
+
+.iiif-region-picker .iiif-rp-breadcrumb .iiif-rp-active {
+  font-weight: 600;
+  opacity: 1;
+}
+
+.iiif-region-picker .iiif-rp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.iiif-region-picker .iiif-rp-subtitle {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+
+.iiif-region-picker .iiif-rp-actions {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+
+/* Canvas picker grid */
+
+.iiif-region-picker .iiif-rp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75em;
+  max-height: 60vh;
+  overflow: auto;
+  padding: 0.25em;
+}
+
+.iiif-region-picker .iiif-rp-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5em;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-secondary);
+  cursor: pointer;
+  transition: border-color 0.1s ease;
+}
+
+.iiif-region-picker .iiif-rp-tile:hover,
+.iiif-region-picker .iiif-rp-tile:focus {
+  border-color: var(--interactive-accent);
+  outline: none;
+}
+
+.iiif-region-picker .iiif-rp-tile img {
+  max-width: 100%;
+  max-height: 160px;
+  object-fit: contain;
+}
+
+.iiif-region-picker .iiif-rp-tile-label {
+  margin-top: 0.4em;
+  font-size: 0.8em;
+  text-align: center;
+  word-break: break-word;
+}
+
+.iiif-region-picker .iiif-rp-no-thumb {
+  width: 100%;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  background: var(--background-primary);
+  opacity: 0.6;
+  font-size: 0.8em;
+}
+
+/* Region drawer */
+
+.iiif-region-picker .iiif-rp-stage {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.iiif-region-picker .iiif-rp-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  -webkit-user-drag: none;
+}
+
+.iiif-region-picker .iiif-rp-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.iiif-region-picker .iiif-rp-selection {
+  position: absolute;
+  border: 2px solid var(--interactive-accent);
+  background: color-mix(in srgb, var(--interactive-accent) 15%, transparent);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.iiif-region-picker .iiif-rp-readout {
+  font-family: var(--font-monospace);
+  font-size: 0.85em;
+  opacity: 0.85;
+  padding: 0.4em 0.6em;
+  background: var(--background-secondary);
+  border-radius: 4px;
+}
+
+/* Preview */
+
+.iiif-region-picker .iiif-rp-preview {
+  display: flex;
+  justify-content: center;
+  padding: 0.5em;
+  background: var(--background-secondary);
+  border-radius: 4px;
+}
+
+.iiif-region-picker .iiif-rp-preview img {
+  max-width: 100%;
+  max-height: 400px;
+}
+
+.iiif-region-picker .iiif-rp-code {
+  white-space: pre-wrap;
+  word-break: break-all;
+  background: var(--background-secondary);
+  padding: 0.5em 0.75em;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+/* ---------- Canvas browser modal ---------- */
+
+.iiif-canvas-browser .iiif-cb-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.iiif-canvas-browser .iiif-cb-subtitle {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+
+.iiif-canvas-browser .iiif-cb-search input {
+  padding: 0.4em 0.6em;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  color: inherit;
+}
+
+.iiif-canvas-browser .iiif-cb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75em;
+  max-height: 55vh;
+  overflow: auto;
+  padding: 0.25em;
+}
+
+.iiif-canvas-browser .iiif-cb-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.4em;
+  border: 2px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-secondary);
+  cursor: pointer;
+  transition: border-color 0.1s ease;
+}
+
+.iiif-canvas-browser .iiif-cb-tile:hover,
+.iiif-canvas-browser .iiif-cb-tile:focus {
+  border-color: var(--interactive-accent);
+  outline: none;
+}
+
+.iiif-canvas-browser .iiif-cb-tile.iiif-cb-selected {
+  border-color: var(--interactive-accent);
+  background: color-mix(in srgb, var(--interactive-accent) 18%, var(--background-secondary));
+}
+
+.iiif-canvas-browser .iiif-cb-tile img {
+  max-width: 100%;
+  max-height: 140px;
+  object-fit: contain;
+}
+
+.iiif-canvas-browser .iiif-cb-tile-label {
+  margin-top: 0.3em;
+  font-size: 0.8em;
+  text-align: center;
+  word-break: break-word;
+}
+
+.iiif-canvas-browser .iiif-cb-no-thumb {
+  width: 100%;
+  height: 110px;
+  display: grid;
+  place-items: center;
+  background: var(--background-primary);
+  opacity: 0.6;
+  font-size: 0.8em;
+}
+
+.iiif-canvas-browser .iiif-cb-pagination {
+  display: flex;
+  gap: 0.75em;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+  opacity: 0.85;
+  margin-top: 0.5em;
+}
+
+.iiif-canvas-browser .iiif-cb-empty {
+  text-align: center;
+  padding: 2em;
+  opacity: 0.7;
+}
+
+.iiif-canvas-browser .iiif-cb-actions {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+
+/* ---------- Annotation import modal ---------- */
+
+.iiif-annotation-modal .iiif-am-hint {
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+
+.iiif-annotation-modal .iiif-am-actions {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+
+/* ---------- Collection import modal ---------- */
+
+.iiif-collection-modal .iiif-col-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.iiif-collection-modal .iiif-col-subtitle {
+  margin: 0;
+  opacity: 0.85;
+  font-size: 0.9em;
+}
+
+.iiif-collection-modal .iiif-col-stats {
+  margin: 0.25em 0 0.5em;
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+
+.iiif-collection-modal .iiif-col-list {
+  max-height: 40vh;
+  overflow: auto;
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.iiif-collection-modal .iiif-col-list li {
+  margin: 0.15em 0;
+}
+
+.iiif-collection-modal .iiif-col-type {
+  opacity: 0.65;
+  font-size: 0.8em;
+}
+
+.iiif-collection-modal .iiif-col-more {
+  font-size: 0.8em;
+  opacity: 0.75;
+  margin-top: -0.5em;
+}
+
+.iiif-collection-modal .iiif-col-failed {
+  color: var(--text-error);
+}
+
+.iiif-collection-modal .iiif-col-progress {
+  width: 100%;
+  height: 8px;
+  background: var(--background-modifier-border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 0.5em;
+}
+
+.iiif-collection-modal .iiif-col-progress-fill {
+  height: 100%;
+  background: var(--interactive-accent);
+  transition: width 0.2s ease;
+}
+
+.iiif-collection-modal .iiif-col-actions {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+
+/* ---------- Refresh summary modal ---------- */
+
+.iiif-refresh-modal .iiif-rm-subtitle {
+  margin: 0 0 0.75em;
+  font-size: 0.9em;
+  opacity: 0.85;
+}
+
+.iiif-refresh-modal .iiif-rm-unchanged {
+  padding: 0.75em;
+  border: 1px dashed var(--background-modifier-border);
+  border-radius: 4px;
+  font-style: italic;
+}
+
+.iiif-refresh-modal .iiif-rm-body h3 {
+  font-size: 0.95em;
+  margin: 1em 0 0.3em;
+}
+
+.iiif-refresh-modal .iiif-rm-warn {
+  color: var(--text-error);
+}
+
+.iiif-refresh-modal .iiif-rm-warn-text {
+  color: var(--text-error);
+  font-size: 0.85em;
+  margin: 0.2em 0 0.4em;
+}
+
+.iiif-refresh-modal .iiif-rm-actions {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+
+/* ---------- Transcript modal ---------- */
+
+.iiif-transcript-modal .iiif-tm-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.iiif-transcript-modal .iiif-tm-subtitle {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+
+.iiif-transcript-modal .iiif-tm-empty {
+  text-align: center;
+  padding: 1.5em;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.iiif-transcript-modal .iiif-tm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.iiif-transcript-modal .iiif-tm-row {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 0.6em 0.8em;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 5px;
+  background: var(--background-secondary);
+}
+
+.iiif-transcript-modal .iiif-tm-row-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.iiif-transcript-modal .iiif-tm-row-title {
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.iiif-transcript-modal .iiif-tm-row-meta {
+  font-size: 0.8em;
+  opacity: 0.75;
+  margin-top: 0.2em;
+}
+
+.iiif-transcript-modal .iiif-tm-actions {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+
+/* ---------- Import modal ---------- */
+
+.iiif-import-preview .iiif-hint {
+  font-size: 0.85em;
+  opacity: 0.7;
+}

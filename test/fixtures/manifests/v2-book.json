@@ -1,0 +1,108 @@
+{
+  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@id": "https://example.org/iiif/ms-42/manifest",
+  "@type": "sc:Manifest",
+  "label": "Manuscrit 42 — Recueil de miniatures",
+  "metadata": [
+    { "label": "Titre", "value": "Recueil de miniatures" },
+    { "label": "Date", "value": "XIVe siècle" },
+    { "label": "Lieu", "value": "Paris" },
+    { "label": "Cote", "value": "MS 42" },
+    { "label": "Support", "value": "Parchemin" },
+    { "label": "Dimensions", "value": "320 x 220 mm" }
+  ],
+  "description": "Recueil de miniatures, France, XIVe siècle.",
+  "attribution": "Bibliothèque d'Exemple — domaine public",
+  "license": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "thumbnail": {
+    "@id": "https://example.org/iiif/ms-42/canvas/f001r/full/120,/0/default.jpg"
+  },
+  "sequences": [
+    {
+      "@id": "https://example.org/iiif/ms-42/sequence/normal",
+      "@type": "sc:Sequence",
+      "viewingDirection": "left-to-right",
+      "viewingHint": "paged",
+      "canvases": [
+        {
+          "@id": "https://example.org/iiif/ms-42/canvas/f001r",
+          "@type": "sc:Canvas",
+          "label": "f. 1r",
+          "height": 4200,
+          "width": 3000,
+          "images": [
+            {
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://example.org/iiif/ms-42/f001r.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "height": 4200,
+                "width": 3000,
+                "service": {
+                  "@context": "http://iiif.io/api/image/2/context.json",
+                  "@id": "https://example.org/iiif/2/ms-42-f001r",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+              },
+              "on": "https://example.org/iiif/ms-42/canvas/f001r"
+            }
+          ]
+        },
+        {
+          "@id": "https://example.org/iiif/ms-42/canvas/f001v",
+          "@type": "sc:Canvas",
+          "label": "f. 1v",
+          "height": 4200,
+          "width": 3000,
+          "images": [
+            {
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://example.org/iiif/ms-42/f001v.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "height": 4200,
+                "width": 3000,
+                "service": {
+                  "@context": "http://iiif.io/api/image/2/context.json",
+                  "@id": "https://example.org/iiif/2/ms-42-f001v",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+              },
+              "on": "https://example.org/iiif/ms-42/canvas/f001v"
+            }
+          ]
+        },
+        {
+          "@id": "https://example.org/iiif/ms-42/canvas/f002r",
+          "@type": "sc:Canvas",
+          "label": "f. 2r",
+          "height": 4200,
+          "width": 3000,
+          "images": [
+            {
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://example.org/iiif/ms-42/f002r.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "height": 4200,
+                "width": 3000,
+                "service": {
+                  "@context": "http://iiif.io/api/image/2/context.json",
+                  "@id": "https://example.org/iiif/2/ms-42-f002r",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+              },
+              "on": "https://example.org/iiif/ms-42/canvas/f002r"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

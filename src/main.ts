@@ -1,0 +1,124 @@
+import { Plugin } from "obsidian";
+import { handleImport } from "./commands/importManifest.ts";
+import { ImportCollectionModal } from "./ui/import-collection-modal/ImportCollectionModal.ts";
+import { runInsertCanvas } from "./commands/insertCanvas.ts";
+import { runInsertRegion } from "./commands/insertRegion.ts";
+import { runInsertTranscript } from "./commands/insertTranscript.ts";
+import { runCopyViewerLink, runOpenInViewer } from "./commands/openInViewer.ts";
+import { runExportAnnotations } from "./commands/exportAnnotations.ts";
+import { runImportAnnotations } from "./commands/importAnnotations.ts";
+import { runRefreshManifest } from "./commands/refreshManifest.ts";
+import { ImportAnnotationsModal } from "./ui/annotation-modal/ImportAnnotationsModal.ts";
+import { DEFAULT_SETTINGS, type IIIFSettings } from "./settings/types.ts";
+import { IIIFSettingsTab } from "./settings/SettingsTab.ts";
+import { ImportManifestModal } from "./ui/import-modal/ImportManifestModal.ts";
+
+export default class IIIFPlugin extends Plugin {
+  settings: IIIFSettings = { ...DEFAULT_SETTINGS };
+
+  async onload(): Promise<void> {
+    await this.loadSettings();
+
+    this.addCommand({
+      id: "import-manifest",
+      name: "Import IIIF manifest from URL",
+      callback: () => {
+        new ImportManifestModal(this.app, this.settings, async (manifest, url) => {
+          await handleImport({ app: this.app, settings: this.settings }, manifest, url);
+        }).open();
+      },
+    });
+
+    this.addCommand({
+      id: "import-collection",
+      name: "Import IIIF collection from URL",
+      callback: () => {
+        new ImportCollectionModal(this.app, {
+          app: this.app,
+          settings: this.settings,
+        }).open();
+      },
+    });
+
+    this.addCommand({
+      id: "insert-region",
+      name: "Insert IIIF region",
+      editorCallback: (editor) => {
+        void runInsertRegion({ app: this.app, settings: this.settings }, editor);
+      },
+    });
+
+    this.addCommand({
+      id: "insert-canvas",
+      name: "Browse IIIF canvases and insert",
+      editorCallback: (editor) => {
+        void runInsertCanvas({ app: this.app, settings: this.settings }, editor);
+      },
+    });
+
+    this.addCommand({
+      id: "insert-transcript",
+      name: "Insert IIIF transcript (ALTO / hOCR / plain text)",
+      editorCallback: (editor) => {
+        void runInsertTranscript({ app: this.app, settings: this.settings }, editor);
+      },
+    });
+
+    this.addCommand({
+      id: "refresh-manifest",
+      name: "Refresh manifest from frontmatter",
+      callback: () => {
+        void runRefreshManifest({ app: this.app, settings: this.settings });
+      },
+    });
+
+    this.addCommand({
+      id: "open-in-viewer",
+      name: "Open manifest in external viewer",
+      callback: () => {
+        runOpenInViewer({ app: this.app, settings: this.settings });
+      },
+    });
+
+    this.addCommand({
+      id: "copy-viewer-link",
+      name: "Copy external viewer link",
+      callback: () => {
+        void runCopyViewerLink({ app: this.app, settings: this.settings });
+      },
+    });
+
+    this.addCommand({
+      id: "export-annotations",
+      name: "Export note's IIIF embeds as Web Annotations",
+      callback: () => {
+        void runExportAnnotations({ app: this.app, settings: this.settings });
+      },
+    });
+
+    this.addCommand({
+      id: "import-annotations",
+      name: "Import Web Annotations into note",
+      editorCallback: (editor) => {
+        new ImportAnnotationsModal(this.app, async (source) => {
+          await runImportAnnotations(
+            { app: this.app, settings: this.settings },
+            editor,
+            source,
+          );
+        }).open();
+      },
+    });
+
+    this.addSettingTab(new IIIFSettingsTab(this.app, this));
+  }
+
+  async loadSettings(): Promise<void> {
+    const stored = (await this.loadData()) as Partial<IIIFSettings> | null;
+    this.settings = { ...DEFAULT_SETTINGS, ...(stored ?? {}) };
+  }
+
+  async saveSettings(): Promise<void> {
+    await this.saveData(this.settings);
+  }
+}
