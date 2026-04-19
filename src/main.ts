@@ -1,5 +1,6 @@
 import { Plugin } from "obsidian";
 import { handleImport } from "./commands/importManifest.ts";
+import { ImportCollectionModal } from "./ui/import-collection-modal/ImportCollectionModal.ts";
 import { runInsertCanvas } from "./commands/insertCanvas.ts";
 import { runInsertRegion } from "./commands/insertRegion.ts";
 import { runInsertTranscript } from "./commands/insertTranscript.ts";
@@ -20,6 +21,17 @@ export default class IIIFPlugin extends Plugin {
       callback: () => {
         new ImportManifestModal(this.app, this.settings, async (manifest, url) => {
           await handleImport({ app: this.app, settings: this.settings }, manifest, url);
+        }).open();
+      },
+    });
+
+    this.addCommand({
+      id: "import-collection",
+      name: "Import IIIF collection from URL",
+      callback: () => {
+        new ImportCollectionModal(this.app, {
+          app: this.app,
+          settings: this.settings,
         }).open();
       },
     });

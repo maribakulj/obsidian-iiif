@@ -21,6 +21,16 @@ export interface NoteBuilderOptions {
    * attachment becomes the canonical thumbnail for the note body.
    */
   headerThumbnailOverride?: string;
+  /**
+   * When the note is being created as part of a collection import,
+   * pass the parent collection's URL and the wiki-link stem of its
+   * index note. Surfaces them as `parent_collection` and
+   * `collection_index` frontmatter fields for Dataview navigation.
+   */
+  parentCollection?: {
+    url: string;
+    indexNoteStem: string;
+  };
 }
 
 export interface BuiltNote {
@@ -55,6 +65,10 @@ function buildFrontmatter(manifest: IIIFManifest, opts: NoteBuilderOptions): Fro
   if (opts.headerThumbnailOverride) fm.iiif_thumbnail_local = opts.headerThumbnailOverride;
   if (manifest.provider) fm.provider = manifest.provider;
   if (manifest.rights) fm.rights = manifest.rights;
+  if (opts.parentCollection) {
+    fm.parent_collection = opts.parentCollection.url;
+    fm.collection_index = `[[${opts.parentCollection.indexNoteStem}]]`;
+  }
   for (const [key, value] of Object.entries(enrichFrontmatter(manifest.metadata))) {
     if (!(key in fm)) fm[key] = value;
   }

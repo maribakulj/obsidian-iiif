@@ -11,6 +11,23 @@ export interface ImportContext {
   settings: IIIFSettings;
 }
 
+export interface ImportOptions {
+  /**
+   * Override the vault folder where the note is created (takes
+   * precedence over `settings.folder`). Used by the collection
+   * importer to colocate manifests with their index.
+   */
+  folderOverride?: string;
+  /**
+   * Parent collection context recorded in the manifest's frontmatter
+   * for later Dataview navigation.
+   */
+  parentCollection?: {
+    url: string;
+    indexNoteStem: string;
+  };
+}
+
 /**
  * Persist a parsed manifest as a Markdown note in the configured folder.
  * Returns the created file so callers can open it.
@@ -19,9 +36,10 @@ export async function importManifestToVault(
   ctx: ImportContext,
   manifest: IIIFManifest,
   sourceUrl: string,
+  opts: ImportOptions = {},
 ): Promise<TFile> {
   const { app, settings } = ctx;
-  const folder = await ensureFolder(app.vault, settings.folder);
+  const folder = await ensureFolder(app.vault, opts.folderOverride ?? settings.folder);
   const stem = buildFilename(settings.filenameTemplate, manifest);
   const initial = `${folder ? folder + "/" : ""}${stem}.md`;
   const targetPath = uniquify(initial, (p) => app.vault.getAbstractFileByPath(p) != null);
@@ -53,6 +71,7 @@ export async function importManifestToVault(
     insertCanvasTable: settings.insertCanvasTable,
     maxCanvasesInTable: settings.maxCanvasesInTable,
     headerThumbnailOverride,
+    parentCollection: opts.parentCollection,
   });
 
   const file = await app.vault.create(targetPath, content);
@@ -85,7 +104,7 @@ export async function handleImport(
   await openNoteIfRequested(ctx.app.workspace, file, ctx.settings);
 }
 
-async function ensureFolder(vault: Vault, raw: string): Promise<string> {
+export async function ensureFolder(vault: Vault, raw: string): Promise<string> {
   const path = normalizePath(sanitizeFolder(raw));
   if (path === "" || path === "/") return "";
   const existing = vault.getAbstractFileByPath(path);
@@ -97,7 +116,7 @@ async function ensureFolder(vault: Vault, raw: string): Promise<string> {
   return path;
 }
 
-function sanitizeFolder(raw: string): string {
+export function sanitizeFolder(raw: string): string {
   // Allow nested folders; only sanitize each segment.
   return raw
     .split(/[\\/]+/)

@@ -3,8 +3,9 @@
 Import IIIF manifests, clip image regions, and weave patrimonial digital objects
 into your notes.
 
-> **Status** — v0.3 (Sprint 5). Import, region picker, canvas browser,
-> and transcript ingestion (ALTO / hOCR / plain text) are all live.
+> **Status** — v0.4 (Sprint 7). Import, region picker, canvas browser,
+> transcript ingestion (ALTO / hOCR / plain text), snapshot + refresh,
+> and bulk collection import are all live.
 
 ## Concept
 
@@ -32,7 +33,7 @@ Think *Zotero for patrimonial visual objects*, not *Mirador in Obsidian*.
 | 4 | Canvas browser | ✅ |
 | 5 | Transcripts & metadata enrichment | ✅ v0.3 |
 | 6 | Cache & resilience | ✅ v0.3.1 |
-| 7 | Collections support | v0.4 |
+| 7 | Collections support | ✅ v0.4 |
 | 8 | External viewer handoff (Mirador/UV) | — |
 | 9 | W3C Web Annotation export | v0.5 |
 | 10 | Polish & community submission | v1.0 |
@@ -124,6 +125,22 @@ it as a vault attachment. The note embeds that local copy instead of
 the remote URL, so your notes keep their visual identity even if the
 institution reorganizes its URLs later. The remote URL is preserved
 in frontmatter for future refreshes.
+
+### Import an entire corpus (IIIF Collection)
+
+1. Run **IIIF: Import IIIF collection from URL** from the command palette.
+2. Paste a IIIF Collection URL. The modal shows a preview (label,
+   summary, item count).
+3. Click **Import** — every `Manifest` entry is fetched and imported
+   concurrently (3 at a time) into a dedicated subfolder. An index
+   note at the folder root links to each imported note and records
+   failures so they're easy to spot.
+4. Each imported note carries `parent_collection` (URL) and
+   `collection_index` (wiki-link back to the index) in frontmatter
+   for Dataview navigation across the whole corpus.
+
+Sub-collections are listed in the index as external links. Re-run
+the command on each to expand them.
 
 ### Refresh a manifest
 
