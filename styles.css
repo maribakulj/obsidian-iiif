@@ -156,6 +156,106 @@
   font-size: 0.85em;
 }
 
+/* ---------- Canvas browser modal ---------- */
+
+.iiif-canvas-browser .iiif-cb-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.iiif-canvas-browser .iiif-cb-subtitle {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+
+.iiif-canvas-browser .iiif-cb-search input {
+  padding: 0.4em 0.6em;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  color: inherit;
+}
+
+.iiif-canvas-browser .iiif-cb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75em;
+  max-height: 55vh;
+  overflow: auto;
+  padding: 0.25em;
+}
+
+.iiif-canvas-browser .iiif-cb-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.4em;
+  border: 2px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-secondary);
+  cursor: pointer;
+  transition: border-color 0.1s ease;
+}
+
+.iiif-canvas-browser .iiif-cb-tile:hover,
+.iiif-canvas-browser .iiif-cb-tile:focus {
+  border-color: var(--interactive-accent);
+  outline: none;
+}
+
+.iiif-canvas-browser .iiif-cb-tile.iiif-cb-selected {
+  border-color: var(--interactive-accent);
+  background: color-mix(in srgb, var(--interactive-accent) 18%, var(--background-secondary));
+}
+
+.iiif-canvas-browser .iiif-cb-tile img {
+  max-width: 100%;
+  max-height: 140px;
+  object-fit: contain;
+}
+
+.iiif-canvas-browser .iiif-cb-tile-label {
+  margin-top: 0.3em;
+  font-size: 0.8em;
+  text-align: center;
+  word-break: break-word;
+}
+
+.iiif-canvas-browser .iiif-cb-no-thumb {
+  width: 100%;
+  height: 110px;
+  display: grid;
+  place-items: center;
+  background: var(--background-primary);
+  opacity: 0.6;
+  font-size: 0.8em;
+}
+
+.iiif-canvas-browser .iiif-cb-pagination {
+  display: flex;
+  gap: 0.75em;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+  opacity: 0.85;
+  margin-top: 0.5em;
+}
+
+.iiif-canvas-browser .iiif-cb-empty {
+  text-align: center;
+  padding: 2em;
+  opacity: 0.7;
+}
+
+.iiif-canvas-browser .iiif-cb-actions {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+
 /* ---------- Import modal ---------- */
 
 .iiif-import-preview .iiif-hint {

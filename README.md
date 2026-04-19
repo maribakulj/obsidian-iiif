@@ -29,7 +29,7 @@ Think *Zotero for patrimonial visual objects*, not *Mirador in Obsidian*.
 | 1 | IIIF v2/v3 parser, Image API builder | ✅ |
 | 2 | Manifest import command | ✅ v0.1 |
 | 3 | Region picker (drag-rectangle) | ✅ v0.2 |
-| 4 | Canvas browser | — |
+| 4 | Canvas browser | ✅ |
 | 5 | Transcripts & metadata enrichment | v0.3 |
 | 6 | Cache & resilience | — |
 | 7 | Collections support | v0.4 |
@@ -92,6 +92,14 @@ npm test            # run test suite against fixture manifests
 5. Preview, add an optional caption, and click **Insert** — a Markdown
    image embed pointing at the exact IIIF Image API region is inserted
    at your cursor.
+
+### Browse and insert whole canvases
+
+1. Run **IIIF: Browse IIIF canvases and insert** from the command palette.
+2. Filter by label (e.g. `f. 127`) and paginate through long manuscripts.
+3. Click tiles to toggle selection — multi-select is supported.
+4. Click **Insert** to drop all picked canvases into the note at once,
+   in manifest order, as separate Markdown image embeds.
 
 Frontmatter is Dataview-friendly: query your imported manifests by
 `iiif_version`, `provider`, `canvas_count`, `date`, `cote`, etc.

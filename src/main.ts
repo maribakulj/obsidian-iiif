@@ -1,5 +1,6 @@
 import { Plugin } from "obsidian";
 import { handleImport } from "./commands/importManifest.ts";
+import { runInsertCanvas } from "./commands/insertCanvas.ts";
 import { runInsertRegion } from "./commands/insertRegion.ts";
 import { DEFAULT_SETTINGS, type IIIFSettings } from "./settings/types.ts";
 import { IIIFSettingsTab } from "./settings/SettingsTab.ts";
@@ -26,6 +27,14 @@ export default class IIIFPlugin extends Plugin {
       name: "Insert IIIF region",
       editorCallback: (editor) => {
         void runInsertRegion({ app: this.app, settings: this.settings }, editor);
+      },
+    });
+
+    this.addCommand({
+      id: "insert-canvas",
+      name: "Browse IIIF canvases and insert",
+      editorCallback: (editor) => {
+        void runInsertCanvas({ app: this.app, settings: this.settings }, editor);
       },
     });
 
