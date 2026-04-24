@@ -1,6 +1,6 @@
 {
   "name": "obsidian-iiif",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "IIIF research companion for Obsidian — import manifests, clip regions, and link patrimonial digital objects into your vault.",
   "main": "main.js",
   "scripts": {

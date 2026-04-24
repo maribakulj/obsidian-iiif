@@ -63,7 +63,7 @@ describe("buildManifestNote — v3 book", () => {
   });
 
   it("renders the metadata table", () => {
-    assert.match(note, /## Métadonnées/);
+    assert.match(note, /## Metadata/);
     assert.match(note, /\| Titre \| Livre d'heures \|/);
   });
 
@@ -97,8 +97,8 @@ describe("buildManifestNote — seeAlso/rendering", () => {
   const m = parseManifest(load("v3-with-seealso.json"));
   const note = buildManifestNote(m, defaultOpts);
 
-  it("lists rendering and seeAlso under Ressources", () => {
-    assert.match(note, /## Ressources/);
+  it("lists rendering and seeAlso under Resources", () => {
+    assert.match(note, /## Resources/);
     assert.match(note, /Full PDF download/);
     assert.match(note, /ALTO XML transcription/);
     assert.match(note, /Plain text/);
