@@ -33,11 +33,6 @@ export interface NoteBuilderOptions {
   };
 }
 
-export interface BuiltNote {
-  filenameStem: string; // caller appends `.md`
-  body: string;
-}
-
 export function buildManifestNote(
   manifest: IIIFManifest,
   opts: NoteBuilderOptions,
@@ -101,7 +96,7 @@ function buildBody(manifest: IIIFManifest, opts: NoteBuilderOptions): string {
   }
 
   if (manifest.metadata.length > 0) {
-    sections.push("## Métadonnées", renderMetadataTable(manifest.metadata));
+    sections.push("## Metadata", renderMetadataTable(manifest.metadata));
   }
 
   if (opts.insertCanvasTable && manifest.canvases.length > 0) {
@@ -112,7 +107,7 @@ function buildBody(manifest: IIIFManifest, opts: NoteBuilderOptions): string {
   }
 
   const resources = renderResources(manifest);
-  if (resources) sections.push("## Ressources", resources);
+  if (resources) sections.push("## Resources", resources);
 
   return sections.join("\n\n") + "\n";
 }
